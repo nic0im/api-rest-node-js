@@ -6,9 +6,9 @@ const bcrypt = require('bcryptjs');
 
 
 
-const putUsuario = async(req = request, res = response)  =>  {
+const postUsuario = async(req = request, res = response)  =>  {
 
-   const {nombre, correo, password, rol } = req.body;
+   const { nombre, correo, password, rol } = req.body;
 
    const usuario = new Usuario({rol, password, correo, nombre})
 
@@ -28,7 +28,9 @@ const putUsuario = async(req = request, res = response)  =>  {
     })
 
    }catch(err){
+
     console.log(err)
+
     res.json({
         msg:err
     })}
@@ -47,6 +49,6 @@ const getUsuarios = async(req, res= response) => {
 
 
 module.exports={
-    putUsuario,
+    postUsuario,
     getUsuarios
 }
