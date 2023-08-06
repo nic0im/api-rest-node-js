@@ -46,6 +46,11 @@ const getUsuarios = async(req, res= response) => {
     })
 }
 
+const getUsuario = ()   =>  {};
+
+const updateUsuario= () =>  {};
+
+const deleteUsuario= () =>  {};
 
 
 module.exports={
