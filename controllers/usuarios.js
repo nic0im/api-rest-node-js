@@ -6,10 +6,14 @@ const bcrypt = require('bcryptjs');
 
 
 const getUsuarios = async(req, res= response) => {
-    usuarios = await Usuario.find();
+
+    const usuarios = await Usuario.find({estado:true});
+
+    const total = await Usuario.count({estado:true})
 
     res.json({
         msg:"Usuarios registrados:",
+        total: total,
         usuarios
     })
 }
@@ -21,12 +25,21 @@ const postUsuario = async(req = request, res = response)  =>  {
 
    const usuario = new Usuario({rol, password, correo, nombre})
 
+    //*Verificar si el correo ya existe
+    const existeCorreo = await Usuario.findOne({correo})
+
+    if(existeCorreo){
+        return res.status(400).json({
+            msg:"El correo ya esta registrado"
+        })
+    }
+
+
     //*Encriptacion de la contraseña:
     const salt = bcrypt.genSaltSync();
-
     usuario.password= bcrypt.hashSync(password, salt)
    
-
+    
    try{
         await usuario.save()
         console.log("Usuario creado")
