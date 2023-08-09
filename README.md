@@ -1,6 +1,6 @@
 # api-rest-node-js
 
-Still on development
+Still on development.
 
 Make sure to config the ".env" file with your own variables. The "example.env" shows an example.
 
