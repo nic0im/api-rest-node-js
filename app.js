@@ -2,7 +2,8 @@ const express = require('express');
 
 const {conectarDB} = require("./config/dbConfig")
 
-const usuariosRoutes = require("./routes/usuarios")
+const usuariosRoutes = require("./routes/usuarios");
+const loginRoute = require("./routes/auth")
 
 require('dotenv').config()
 
@@ -14,6 +15,7 @@ const app = express();
 app.use(express.json())
 
 app.use("/usuarios", usuariosRoutes)
+app.use("/login", loginRoute)
 
 
 app.listen(3000,()=>{
