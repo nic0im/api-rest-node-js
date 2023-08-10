@@ -2,13 +2,14 @@ const { request, response} = require("express");
 const Usuario = require("../models/usuario")
 
 const bcryptjs = require('bcryptjs');
+const { generarJWT } = require("../helpers/generar-jwt");
 
 const login = async(req, res= response)  =>  {
 
     try {
+
         const {correo, password} = req.body; 
         
-        console.log(correo)
         //verificar correo
         const user = await Usuario.findOne({correo})
     
@@ -26,8 +27,9 @@ const login = async(req, res= response)  =>  {
                 msg: "Usuario inactivo"
             })
         }
-        //verificar contraseña 
 
+
+        //verificar contraseña 
         const validPassword = bcryptjs.compareSync(password, user.password)
 
         if(!validPassword){
@@ -36,14 +38,16 @@ const login = async(req, res= response)  =>  {
             })
         }
 
+    
         //generar jwt
+        const token = await generarJWT(user.id);
 
         return res.json({
-            msg: "Login ok"
+            user,
+            token
         })
 
     } catch(err){
-        console.log(err)
         return res.json({
             msg: "Hable con el administrador"
         })
