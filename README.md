@@ -5,13 +5,13 @@ Este repositorio contiene una API REST desarrollada con Node.js, MongoDB y Expre
 ### Dependencias
 Las siguientes dependencias son utilizadas en este proyecto:
 
-**bcryptjs:** Librería para el hash y la verificación segura de contraseñas.
-**dotenv:** Carga variables de entorno desde un archivo .env para la configuración.
-**express:** Marco de aplicación web de Node.js que facilita la creación de API y rutas.
-**express-validator:** Middleware para validar y sanitizar datos de solicitudes HTTP.
-**jsonwebtoken:** Implementación de JSON Web Tokens (JWT) para autenticación.
-**mongoose:** Modelado de objetos MongoDB y abstracción para Node.js.
-**nodemon:** Utilidad que monitoriza cambios en los archivos y reinicia automáticamente el servidor.
+**bcryptjs:** Librería para el hash y la verificación segura de contraseñas.  
+**dotenv:** Carga variables de entorno desde un archivo .env para la configuración.  
+**express:** Marco de aplicación web de Node.js que facilita la creación de API y rutas.  
+**express-validator:** Middleware para validar y sanitizar datos de solicitudes HTTP.  
+**jsonwebtoken:** Implementación de JSON Web Tokens (JWT) para autenticación.  
+**mongoose:** Modelado de objetos MongoDB y abstracción para Node.js.  
+**nodemon:** Utilidad que monitoriza cambios en los archivos y reinicia automáticamente el servidor.  
 Asegúrate de instalar estas dependencias utilizando el comando npm install antes de ejecutar el proyecto.
 
 ### Instalación
