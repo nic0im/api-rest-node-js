@@ -83,7 +83,7 @@ const deleteUsuario = async( req = request, res = response ) => {
 
     const {id} = req.params;
 
-    //Este uid se extrajo del payload del token y se asigno a una nueva propiedad llamada "uid" de la request, 
+    //Este usuarioAutenticado se extrajo del payload del token y se asigno a una nueva propiedad llamada "uid" de la request, 
     //corresponde al id del usuario autenticado.
     const usuarioAuntenticado = req.usuarioAuntenticado;
 
