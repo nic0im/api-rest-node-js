@@ -60,11 +60,12 @@ const postUsuario = async(req = request, res = response)  =>  {
 
 const putUsuario = async (req = request, res = response) => {
     
-    const {id} = req.params;
+    const { id } = req.params;
 
-    const {_id, correo, password, rol, ...resto} = req.body;
+    const { _id, correo, password, rol, ...resto} = req.body;
 
-    if(password){
+    if( password ) {
+
         //*Encriptacion de la contraseña:
         const salt = bcrypt.genSaltSync();
         resto.password= bcrypt.hashSync(password, salt)
@@ -79,11 +80,16 @@ const putUsuario = async (req = request, res = response) => {
 };
 
 const deleteUsuario = async( req = request, res = response ) => {
+
     const {id} = req.params;
+
+    //Este uid se extrajo del payload del token y se asigno a una nueva propiedad llamada "uid" de la request, 
+    //corresponde al id del usuario autenticado.
+    const usuarioAuntenticado = req.usuarioAuntenticado;
 
     const usuario = await Usuario.findByIdAndUpdate( id, {estado: false}, { new: true } )
 
-    res.json(usuario)
+    res.json({usuario, usuarioAuntenticado})
 };
 
 
