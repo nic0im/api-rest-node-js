@@ -9,7 +9,7 @@ const validarJwt = async(req= request, res= response, next) => {
 
     if(!token){
         return res.json({
-            msg: "Must include a token"
+            msg: "Token no incluido"
         });
     }
 

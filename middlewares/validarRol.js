@@ -9,6 +9,8 @@ const validarRolAdmin = (req=request, res, next) => {
         msg: 'Se requiere validar el token antes de validar el rol'});
    }
 
+   console.log(usuarioAuntenticado.rol)
+   
    if(usuarioAuntenticado.rol !== 'ADMIN_ROLE'){
     return res.status(403).json({
         msg:'No cuentas con los permisos necesarios para realizar esta accion'})
