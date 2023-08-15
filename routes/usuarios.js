@@ -31,6 +31,7 @@ router.post("/",[
 ],postUsuario);
 
 router.put("/:id",[
+    validarJwt,
     check('id', "El campo id no es un mongo id valido").isMongoId(),
     check('id').custom(existeUserPorId),
     check('rol').custom(validarRol),
