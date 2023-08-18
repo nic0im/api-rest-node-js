@@ -8,7 +8,7 @@ const { validarJwt } = require("../middlewares/validar-jwt");
 const { validarRolAdmin } = require("../middlewares/validarRol");
 
 //Controllers imports
-const { getUsuarios, postUsuario, putUsuario, deleteUsuario } = require("../controllers/usuarios");
+const { getUsuarios, postUsuario, putUsuario, deleteUsuario, getUsuario } = require("../controllers/usuarios");
 
 //Helpers imports
 const { validarRol, existeCorreo, existeUserPorId } = require("../helpers/db-validators");
@@ -19,6 +19,9 @@ const router = express.Router();
 
 //Routes
 router.get("/", getUsuarios);
+
+router.get("/:id", getUsuario);
+
 
 router.post("/",[
     check("nombre","El Nombre no debe estar vacio").not().isEmpty(),
