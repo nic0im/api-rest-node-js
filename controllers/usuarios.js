@@ -10,9 +10,15 @@ const getUsuario = async(req, res = response)=>{
 
     const { id } = req.params;
 
-    const user = await Usuario.findById(id)
+    try {
+        const user = await Usuario.findById(id)
+        if(!user){throw new Error('User not found')}
+        res.json(user)
 
-    res.json({user})
+    }catch(err){
+        console.log(err)
+        res.status(404).json({msg:'User not found'})
+    }
 }
 
 

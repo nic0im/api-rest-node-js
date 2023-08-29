@@ -33,5 +33,16 @@ const existeUserPorId = async(id) => {
 
 }
 
+//Validar colecciones permitidas
+const coleccionesPermitidas = (coleccion = '', colecciones = [] ) => {
 
-module.exports={validarRol, existeCorreo, existeUserPorId}
+    const incluida = colecciones.includes(coleccion);
+
+    if(!incluida){
+        throw new Error(`La colección ${coleccion} no es permitida, ${colecciones}`)
+    }
+    return true;
+}
+
+
+module.exports={validarRol, existeCorreo, existeUserPorId,coleccionesPermitidas}
