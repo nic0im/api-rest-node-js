@@ -18,6 +18,7 @@ const cargarArchivo = async ( req, res = response) => {
             res.json({nombre})
 
         } 
+
     catch (err) {
 
         console.log(err)
@@ -80,7 +81,7 @@ const mostrarImagen = async (req, res= response) => {
             modelo = await Usuario.findById(id);
             
             if(!modelo){
-                res.status(400).json({
+                return res.status(400).json({
                     msg: `No existe usuario con id ${id}`
                 });
             }
@@ -93,7 +94,9 @@ const mostrarImagen = async (req, res= response) => {
 
     
     //Limpiar imagenes previas
+    try {
 
+    
     if ( modelo.img ) {
         //borrar la img del servidor
         const imgPath = path.join(__dirname, '../uploads', coleccion, modelo.img);
@@ -106,6 +109,11 @@ const mostrarImagen = async (req, res= response) => {
     const noImgPath = path.join(__dirname, '../assets/no-image.jpg');
 
     return res.sendFile(noImgPath)
+    
+    } catch ( err ) {
+        console.log(err)
+        return res.json(err)
+    }
 }
 
 module.exports={
