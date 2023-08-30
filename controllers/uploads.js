@@ -7,6 +7,13 @@ const { model } = require('mongoose');
 const path = require('path')
 const fs = require('fs')
 
+const cloudinary =  require('cloudinary').v2;
+          
+cloudinary.config({ 
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 const cargarArchivo = async ( req, res = response) => {
 
@@ -116,8 +123,55 @@ const mostrarImagen = async (req, res= response) => {
     }
 }
 
+
+const actualizarImagenCloudinary = async (req= request, res = response) => {
+
+    const {id, coleccion} = req.params;
+
+    let modelo;
+
+    switch ( coleccion ) {
+        case'usuarios':
+            modelo = await Usuario.findById(id);
+            
+            if(!modelo){
+                res.status(400).json({
+                    msg: `No existe usuario con id ${id}`
+                });
+            }
+
+        break;
+
+        default:
+            return res.status(500).json({msg: 'forbidden colecction'})
+    }
+
+    
+    if ( modelo.img ) {
+        const nombreArr = modelo.img.split('/');
+        const nombre = nombreArr[nombreArr.length - 1]
+        const [public_id] = nombre.split('.')
+
+        cloudinary.uploader.destroy( public_id )
+    }
+
+    const { tempFilePath } = req.files.archivo
+
+    const { secure_url } = await cloudinary.uploader.upload(tempFilePath)
+
+    modelo.img = secure_url;
+
+    await modelo.save();
+
+    return res.json(modelo)
+}
+
+
+
+
 module.exports={
     cargarArchivo,
     actualizarImagen,
-    mostrarImagen
+    mostrarImagen,
+    actualizarImagenCloudinary
 }

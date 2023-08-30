@@ -4,7 +4,7 @@ const router = Router();
 const { validarCampos, validarArchivoSubir } = require("../middlewares");
 const { check } = require("express-validator");
 
-const { cargarArchivo, actualizarImagen, mostrarImagen } = require("../controllers/uploads");
+const { cargarArchivo, mostrarImagen, actualizarImagenCloudinary, actualizarImagen } = require("../controllers/uploads");
 const { coleccionesPermitidas } = require("../helpers");
 
 
